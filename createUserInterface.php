@@ -17,11 +17,13 @@ include_once("helpers/queries.php");
 	<style>
 		.bg-box {
 			background-color: #FFFFF0, rgba(0, 0, 0, 0.2);
-			padding: 30px;
+			padding: 20px;
 			border-radius: 20px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 			font-size: 20px;
 			color: white;
+			margin: auto;
+
 		}
 
 		body {
@@ -29,6 +31,8 @@ include_once("helpers/queries.php");
 			background-image: url("./assets/images/mountain.png");
 			background-size: cover;
 			background-repeat: no-repeat;
+			background-position: center;
+
 
 		}
 
@@ -67,6 +71,7 @@ include_once("helpers/queries.php");
 	<div class="container my-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-10">
+				<br>
 				<h1 class="text-center mb-4 title">Create Account</h1>
 				<div class="bg-box">
 					<form method="post" action="">
@@ -77,10 +82,10 @@ include_once("helpers/queries.php");
 						<div class="mb-3">
 							<label for="inputPassword" class="form-label" required>Password</label>
 							<input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$" required>
-						
+
 						</div>
 						<div id="requirements"></div>
-						
+
 						<div class="mb-3">
 							<label for="inputConfirmPassword" class="form-label" required>Confirm Password</label>
 							<input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Confirm your password" required>
@@ -96,7 +101,7 @@ include_once("helpers/queries.php");
 					</form>
 					<?php
 					if (isset($_POST['submit'])) {
-						if($_POST['inputConfirmPassword'] == $_POST['inputPassword']){
+						if ($_POST['inputConfirmPassword'] == $_POST['inputPassword']) {
 							$user = $_POST['inputName'];
 							// $pw = $_POST['inputPassword'];
 							$pw = addslashes(encryptor($_POST['inputPassword']));
@@ -108,7 +113,7 @@ include_once("helpers/queries.php");
 						}
 					}
 					?>
-					<p class="text-center mt-3" style= color:white>Already have an account?</p>
+					<p class="text-center mt-3" style=color:white>Already have an account?</p>
 					<div style="text-align: center;">
 						<a href="logInInterface.php" class="btn btn-secondary btn-block">Log in</a>
 					</div>

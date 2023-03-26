@@ -20,14 +20,13 @@ function SelectLogin($username)
     return  $result->fetch_array(MYSQLI_ASSOC);
 }
 
-function SelectPassword()
+function SelectPassword($uid)
 {
     $dblink = db_connect("rowdytable");
-    $query = "SELECT * FROM `Passwords`";
+    $query = "SELECT * FROM `Passwords` WHERE `userId` = '$uid'";
     $result = $dblink->query($query) or
         die("Something went wrong with $query: " . $dblink->error);
-    $data = $result->fetch_array(MYSQLI_ASSOC);
-    echo $data['Password'];
+    return $result;
 }
 function InsertUser($User, $Password, $email)
 {

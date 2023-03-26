@@ -20,18 +20,22 @@ include_once("helpers/timer.php");
 			background-color: #7B7B7C;
 			background-image: url("./assets/images/mountain.png");
 			background-size: cover;
+			background-position: center;
 			background-repeat: no-repeat;
+
 
 		}
 
 
 		.bg-box {
-			padding: 40px;
+			padding: 60px;
 			border-radius: 30px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 2);
 			font-size: 22px;
 			background-color: #FFFFF0, rgba(0, 0, 0, 0.2);
 			color: white;
+			margin: auto;
+
 		}
 
 		body {
@@ -40,7 +44,7 @@ include_once("helpers/timer.php");
 
 		.title {
 			color: #ff5349;
-			font-family:"Optima", sans-serif;
+			font-family: "Optima", sans-serif;
 		}
 
 		.btn-primary {
@@ -68,7 +72,7 @@ include_once("helpers/timer.php");
 		.btn-secondary:hover {
 			background-color: #800000;
 		}
-		
+
 		.centerContent {
 			text-align: center;
 		}
@@ -79,6 +83,7 @@ include_once("helpers/timer.php");
 	<div class="container my-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-10">
+				<br>
 				<h1 class="text-center mb-4 title">Log In</h1>
 				<div class="bg-box">
 					<form method="post" action="">
@@ -99,7 +104,7 @@ include_once("helpers/timer.php");
 
 					<?php
 					if (isset($_SESSION["id"])) {
-						redirect("displayPasswordsInterface.php");
+						redirect("displayPasswordInterface.php");
 					}
 					if (isset($_POST['submit'])) {
 						$start = tStart();
@@ -109,14 +114,14 @@ include_once("helpers/timer.php");
 
 						$result = SelectLogin($user);
 
-						if ($result['User'] == $user and $result['Password'] == $pw) {
+						if (isset($result['User']) and $result['User'] == $user and $result['Password'] == $pw) {
 							$time = tTotal($start);
-							logTime("Users",$time,"Login",1);
+							logTime("Users", $time, "Login", 1);
 							$_SESSION["id"] = encryptor($result["autoId"]);
-							redirect("displayPasswordsInterface.php");
+							redirect("displayPasswordInterface.php");
 						} else {
 							$time = tTotal($start);
-							logTime("Users",$time,"Login",0);
+							logTime("Users", $time, "Login", 0);
 							redirect("logInInterface.php");
 						}
 					}
