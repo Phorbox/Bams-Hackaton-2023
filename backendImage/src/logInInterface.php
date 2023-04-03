@@ -107,13 +107,21 @@ include_once("helpers/timer.php");
 						redirect("displayPasswordInterface.php");
 					}
 					if (isset($_POST['submit'])) {
+						$start = tStart();
 						$user = $_POST['inputName'];
 						$pw = addslashes(encryptor($_POST['inputPassword']));
+
+
 						$result = SelectLogin($user);
+
 						if (isset($result['User']) and $result['User'] == $user and $result['Password'] == $pw) {
+							$time = tTotal($start);
+							logTime("Users", $time, "Login", 1);
 							$_SESSION["id"] = encryptor($result["autoId"]);
 							redirect("displayPasswordInterface.php");
 						} else {
+							$time = tTotal($start);
+							logTime("Users", $time, "Login", 0);
 							redirect("logInInterface.php");
 						}
 					}

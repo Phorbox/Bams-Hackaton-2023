@@ -1,4 +1,2 @@
-FROM php:7.4-cli
-
-COPY ./Bams-Hackathon-2023 /usr/src/myapp
-WORKDIR /usr/src/myapp
+FROM php:7.4-fpm
+RUN docker-php-ext-install mysqli
